@@ -9,7 +9,7 @@ console.log(localStorage.getItem('position'))
 const savedStateStr = localStorage.getItem('position') || '{"center": [60.16, 24.9], "zoom": 10}';
 const savedState = JSON.parse(savedStateStr);
 const mymap = L.map('mapid').setView(savedState.center, savedState.zoom);
-L.tileLayer('http://{s}.tile.openstreetmap.org/{z}/{x}/{y}.png', {
+L.tileLayer('https://{s}.tile.openstreetmap.org/{z}/{x}/{y}.png', {
   'attribution': 'Map data © <a href="http://openstreetmap.org">OpenStreetMap</a> contributors'
 }).addTo(mymap);
 const layerGroup = L.layerGroup().addTo(mymap);
