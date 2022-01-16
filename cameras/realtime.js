@@ -107,9 +107,11 @@ function updateStations() {
   markers.forEach(m => m.addTo(layerGroup));
 }
 
-mymap.on('moveend', async (e) => {
-  storeMapState();
-  updateStations();
+mymap.on('moveend', (e) => {
+  _.debounce(() => {
+    storeMapState();
+    updateStations();
+  }, 1000, { leading: true, trailing: true });
 });
 
 function stationMarker(station) {
