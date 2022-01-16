@@ -5,7 +5,6 @@ const config = {
   userName: 'digitraffic',
   password: 'digitrafficPassword',
 }
-console.log(localStorage.getItem('position'))
 const savedStateStr = localStorage.getItem('position') || '{"center": [60.16, 24.9], "zoom": 10}';
 const savedState = JSON.parse(savedStateStr);
 const mymap = L.map('mapid').setView(savedState.center, savedState.zoom);
@@ -114,11 +113,12 @@ mymap.on('moveend', async (e) => {
 });
 
 function stationMarker(station) {
+  const { speed = 0 } = station;
   const coords = station.geometry.coordinates.slice(0, 2).reverse();
   const marker = L.marker(coords, {
     icon: makeIcon(station)
   });
-  marker.bindPopup(`Address: <b>${station.properties.names.en}</b><br /> Avg speed: <b>in progress km/h</b>`)
+  marker.bindPopup(`Address: <b>${station.properties.names.en}</b><br /> Avg speed: <b>${speed} km/h</b>`)
   return marker;
 }
 
